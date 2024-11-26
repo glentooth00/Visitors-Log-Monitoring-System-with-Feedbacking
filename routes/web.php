@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
+});
+
+Route::post('/user/login', [LoginController::class, 'loginHandler'])->name('login');
+
+Route::middleware('auth')->group(function(){
+   
+    Route::get('/Dashboard', [UsersController::class, 'index'])->name('admin.dashboard');
+
 });
