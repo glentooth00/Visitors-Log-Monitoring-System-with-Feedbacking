@@ -7,6 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="p-1">
+        <a href="{{ route('visitor') }}">Visitor?</a>
+    </div>
     <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
         <!-- System Title -->
         <div class="text-center mb-4">
@@ -63,6 +66,7 @@
                       </div>
                   @enderror
               </div>
+
           
               <!-- Submit Button -->
               <button type="submit" class="btn btn-primary w-100">Login</button>
