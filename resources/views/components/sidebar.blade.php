@@ -1,11 +1,11 @@
 <!-- Sidebar Component -->
-<nav id="sidebar" class="bg-dark">
+<nav id="sidebar" class="">
     <div class="sidebar-header text-center py-3">
         <h4 class="text-white" id="sidebarTitle">Visitors Log Monitoring System</h4>
         <h5 class="text-white" id="sidebarSubtitle">with Feedbacking</h5>
         <hr>
     </div>
-    <ul class="list-unstyled components">
+    <ul class="list-unstyled components ml-3">
         <li class="nav-item">
             <a class="nav-link active" href="#">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
@@ -22,40 +22,64 @@
             <a href="#settingsSubmenu" class="text-white dropdown-toggle main-item" data-bs-toggle="collapse" aria-expanded="false">
                 <i class="fas fa-cogs"></i> Settings
             </a>
-            <ul class="collapse list-unstyled submenu" id="settingsSubmenu">
+            <ul class="collapse list-unstyled submenu pl-4" id="settingsSubmenu">
                 <li>
-                    <a href="#" class="text-white submenu-item">
-                        <i class="fas fa-plus-circle"></i> Add Course
+                    <a href="{{ route('province') }}" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Add Province
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('municipality') }}" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Add Municipality
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Add Barangay
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Add Street
+                    </a>
+                </li>
+                {{-- <li>
                     <a href="#" class="text-white submenu-item">
                         <i class="fas fa-calendar-alt"></i> Yearly
                     </a>
+                </li> --}}
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" class="text-white submenu-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
                 </li>
+                
+                
             </ul>
         </li>
     </ul>
 </nav>
 
 <!-- Main Content Section -->
-<div id="content" class="container-fluid">
+{{-- <div id="" class="">
     <button type="button" id="sidebarToggle" class="btn btn-dark">
         <i class="fas fa-bars"></i> <!-- Hamburger Icon -->
     </button>
     <!-- The rest of your page content goes here -->
-</div>
+</div> --}}
 
 <!-- Custom Sidebar Styling -->
 <style>
     /* Sidebar layout */
     #sidebar {
-        min-width: 250px;
-        max-width: 250px;
+        /* min-width: 250px;
+        max-width: 250px; */
         height: 100vh;
-        background-color: #343a40;
+        background-color: #316294;
         color: #fff;
-        position: fixed;
         transition: all 0.3s ease;
     }
 
@@ -71,11 +95,6 @@
         display: none;
     }
 
-    /* Hide title and subtitle when collapsed */
-    #sidebar.collapsed #sidebarTitle,
-    #sidebar.collapsed #sidebarSubtitle {
-        display: none;
-    }
 
     /* Main Menu Items */
     .main-item {
@@ -97,29 +116,6 @@
         color: #fff;
     }
 
-    /* Hamburger Icon Styling */
-    #sidebarToggle {
-        margin-top: 20px;
-        margin-left: 20px;
-        background: none;
-        border: none;
-        color: #343a40;
-    }
-
-    #sidebarToggle i {
-        font-size: 1.5rem;
-    }
-
-    /* Content section */
-    #content {
-        margin-left: 250px;
-        transition: margin-left 0.3s ease;
-    }
-
-    /* Adjust content area when sidebar is collapsed */
-    #content.sidebar-collapsed {
-        margin-left: 0;
-    }
 </style>
 
 <!-- Include Bootstrap JS for Collapse Behavior -->
@@ -135,16 +131,4 @@
         });
     });
 
-    // document.querySelector('.main-item').addEventListener('click', function(event) {
-    //     var submenu = document.getElementById('settingsSubmenu');
-    //     var isExpanded = submenu.classList.contains('show');
-    //     // Toggle 'collapse' and 'show' class
-    //     if (isExpanded) {
-    //         submenu.classList.remove('show');
-    //     } else {
-    //         submenu.classList.add('show');
-    //     }
-    //     // Update aria-expanded attribute
-    //     event.currentTarget.setAttribute('aria-expanded', !isExpanded);
-    // });
 </script>

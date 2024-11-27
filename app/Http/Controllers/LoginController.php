@@ -43,7 +43,12 @@ class LoginController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'You are now logged in.');
     }
     
-    
+    public function logout()
+    {
+        Auth::logout();
+        
+        return view('login');
+    }
     
 
 }
