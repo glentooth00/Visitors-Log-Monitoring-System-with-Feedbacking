@@ -12,8 +12,8 @@ class Provinces extends Model
     protected $guarded = [];
 
     public function municipalities()
-{
-    return $this->hasMany(Municipalities::class);
-}
+    {
+        return $this->hasMany(Municipalities::class);
+    }
 
 }

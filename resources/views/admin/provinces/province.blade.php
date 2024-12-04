@@ -7,11 +7,11 @@
         <h1>Province Management</h1>
         <hr>
         @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="row">
             <!-- Form Section (Left Side) -->
             <div class="col-md-4">
