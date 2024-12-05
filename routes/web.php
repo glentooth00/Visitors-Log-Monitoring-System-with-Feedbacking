@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\BarangaysController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FeedbacksController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MunicipalitiesController;
+use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ProvincesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VisitorsController;
@@ -25,14 +29,22 @@ Route::get('/visitors', [VisitorsController::class, 'index'])->name('visitor');
 
 Route::post('/store/visitor', [VisitorsController::class, 'store'])->name('store.visitor');
 
+Route::get('/get-municipalities', [VisitorsController::class, 'getMunicipalities'])->name('get.municipalities');
+
+Route::get('/get-barangays', [VisitorsController::class, 'getBarangays'])->name('get.barangays');
+
+//feedbacks
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
+
 Route::get('/', function () {
     return view('login');
 })->name('login.user');
 
 Route::post('/user/login', [LoginController::class, 'loginHandler'])->name('login');
 
-Route::middleware('auth')->group(function(){
-   
+Route::middleware('auth')->group(function () {
+
     Route::get('/Dashboard', [UsersController::class, 'index'])->name('admin.dashboard');
 
     //province
@@ -42,6 +54,17 @@ Route::middleware('auth')->group(function(){
     //municipality
     Route::get('/municipalities', [MunicipalitiesController::class, 'index'])->name('municipality');
     Route::post('/municipalities/store', [MunicipalitiesController::class, 'store'])->name('store.municipality');
+
+    //barangays
+    Route::get('/Barangays', [BarangaysController::class, 'index'])->name('barangays');
+    Route::post('/Barangays/Store', [BarangaysController::class, 'store'])->name('store.barangay');
+
+    //office
+    Route::get('/Office', [OfficeController::class, 'index'])->name('office');
+    Route::post('/Office/create', [OfficeController::class, 'store'])->name('store.office');
+
+    //visitor display page
+    Route::get('/visitors/display', [VisitorsController::class, 'displayPage'])->name('visitor.view');
 
 
 

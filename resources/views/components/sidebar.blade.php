@@ -12,14 +12,15 @@
             </a>
         </li>
         <li>
-            <a href="#" class="text-white menu-item">
+            <a href="{{ route('visitor.view') }}" class="text-white menu-item">
                 <i class="fas fa-users"></i> Visitors
             </a>
         </li>
 
         <!-- Settings Submenu -->
         <li>
-            <a href="#settingsSubmenu" class="text-white dropdown-toggle main-item" data-bs-toggle="collapse" aria-expanded="false">
+            <a href="#settingsSubmenu" class="text-white dropdown-toggle main-item" data-bs-toggle="collapse"
+                aria-expanded="false">
                 <i class="fas fa-cogs"></i> Settings
             </a>
             <ul class="collapse list-unstyled submenu pl-4" id="settingsSubmenu">
@@ -34,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="text-white submenu-item">
+                    <a href="{{ route('barangays') }}" class="text-white submenu-item">
                         <i class="fas fa-plus-circle"></i> Add Barangay
                     </a>
                 </li>
@@ -43,6 +44,16 @@
                         <i class="fas fa-plus-circle"></i> Add Street
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('office') }}" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Add Office
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="{{ route('feedbacks') }}" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Feedback items
+                    </a>
+                </li> --}}
                 {{-- <li>
                     <a href="#" class="text-white submenu-item">
                         <i class="fas fa-calendar-alt"></i> Yearly
@@ -52,12 +63,13 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <a href="#" class="text-white submenu-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="#" class="text-white submenu-item"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
-                
-                
+
+
             </ul>
         </li>
     </ul>
@@ -115,7 +127,6 @@
         background-color: #6c757d;
         color: #fff;
     }
-
 </style>
 
 <!-- Include Bootstrap JS for Collapse Behavior -->
@@ -124,11 +135,10 @@
 
 <script>
     // Toggle Sidebar Collapse
-    $(document).ready(function () {
-        $('#sidebarToggle').on('click', function () {
+    $(document).ready(function() {
+        $('#sidebarToggle').on('click', function() {
             $('#sidebar').toggleClass('collapsed'); // Toggle collapsed class on sidebar
             $('#content').toggleClass('sidebar-collapsed'); // Adjust content layout
         });
     });
-
 </script>

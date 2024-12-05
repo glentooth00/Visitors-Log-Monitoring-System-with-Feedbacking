@@ -17,17 +17,17 @@ class MunicipalitiesController extends Controller
     {
         // Paginate municipalities with 10 entries per page
         $municipalities = Municipalities::with('province')->simplePaginate(10);
-    
+
         // Retrieve all provinces
         $provinces = Provinces::all();
-    
+
         // Return the view with paginated municipalities and provinces
         return view('admin.municipalities.index', [
             'municipalities' => $municipalities,
             'provinces' => $provinces,
         ]);
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -51,12 +51,12 @@ class MunicipalitiesController extends Controller
             'municipality_name' => 'required|string|max:255',
             'province_id' => 'required|exists:provinces,id',
         ]);
-    
+
         Municipalities::create([
             'municipality_name' => $request->municipality_name,
             'province_id' => $request->province_id,
         ]);
-    
+
         return redirect()->back()->with('success', 'Municipality added successfully.');
     }
 

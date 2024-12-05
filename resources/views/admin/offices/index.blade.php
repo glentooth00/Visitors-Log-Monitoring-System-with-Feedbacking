@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Municipalities')
+@section('title', 'Offices')
 
 @section('content')
     <div class="container-fluid">
-        <h1>Municipality Management</h1>
+        <h1>Office Management</h1>
         <hr>
-
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -18,26 +17,18 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add New Municipality</h4>
+                        <h4>Add New Office</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('store.municipality') }}">
+
+                        <form method="POST" action=" {{ route('store.office') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="municipality_name" class="form-label">Municipality Name</label>
-                                <input type="text" class="form-control" id="municipality_name" name="municipality_name"
-                                    required>
+                                <label for="office_name" class="form-label">Office Name</label>
+                                <input type="text" class="form-control" id="office_name" name="office_name" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="province_id" class="form-label">Province</label>
-                                <select class="form-select form-control" id="province_id" name="province_id" required>
-                                    <option value="" hidden>Select Province</option>
-                                    @foreach ($provinces as $province)
-                                        <option value="{{ $province->id }}">{{ $province->province_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Add Municipality</button>
+
+                            <button type="submit" class="btn btn-primary">Add Office</button>
                         </form>
                     </div>
                 </div>
@@ -47,38 +38,38 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Municipalities List</h4>
+                        <h4>Saved Offices</h4>
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Municipality Name</th>
-                                    <th>Province</th>
+                                    <th>Office Name</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($municipalities as $municipality)
+                                {{-- Uncomment when data is available --}}
+                                @forelse ($offices as $office)
                                     <tr>
-                                        <td>{{ $loop->iteration + ($municipalities->currentPage() - 1) * $municipalities->perPage() }}
+                                        <td>{{ $loop->iteration + ($offices->currentPage() - 1) * $offices->perPage() }}
                                         </td>
-                                        <td>{{ $municipality->municipality_name }}</td>
-                                        <td>{{ $municipality->province->province_name }}</td>
+                                        <td>{{ $office->office_name }}</td>
                                         <td>
-                                            {{-- Uncomment and add routes for Edit/Delete as needed --}}
-                                            {{-- <a href="{{ route('municipality.edit', $municipality->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('municipality.destroy', $municipality->id) }}" method="POST" style="display:inline;">
+                                            {{-- {{ route('office.edit', $office->id) }} --}}
+                                            <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                            {{-- {{ route('office.destroy', $office->id) }} --}}
+                                            <form action="" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                            </form> --}}
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center">No municipalities found.</td>
+                                        <td colspan="5" class="text-center">No offices found.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -91,15 +82,16 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="">
-                                    {{ $municipalities->links() }}
+                                    {{-- Uncomment for dynamic pagination --}}
+                                    {{ $offices->links() }}
                                 </div>
                                 &nbsp;
                                 &nbsp;
                                 <p class="mb-0 me-3">
-                                    Page {{ $municipalities->currentPage() }} of
-                                    {{ $municipalities->hasMorePages() ? $municipalities->currentPage() + 1 : $municipalities->currentPage() }}
+                                    {{-- Uncomment for dynamic pagination details --}}
+                                    Page {{ $offices->currentPage() }} of
+                                    {{ $offices->hasMorePages() ? $offices->currentPage() + 1 : $offices->currentPage() }}
                                 </p>
-
                             </div>
                         </div>
                     </div>
