@@ -10,17 +10,18 @@ class OfficeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function index()
     {
-        //
+        $offices = Office::simplePaginate(10); // Fetch 10 offices per page
+        return view('admin.offices.index', ['offices' => $offices]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function create()
     {
@@ -31,18 +32,25 @@ class OfficeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'office_name' => 'string|max:255',
+        ]);
+
+        Office::create($validateData);
+
+        return redirect()->back()->with('success', 'Office successfully added.');
+
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function show(Office $office)
     {
@@ -53,7 +61,7 @@ class OfficeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function edit(Office $office)
     {
@@ -65,7 +73,7 @@ class OfficeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function update(Request $request, Office $office)
     {
@@ -76,7 +84,7 @@ class OfficeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function destroy(Office $office)
     {

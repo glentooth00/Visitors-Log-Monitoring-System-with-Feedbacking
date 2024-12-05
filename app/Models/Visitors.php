@@ -9,6 +9,9 @@ class Visitors extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'visit_date' => 'datetime',  // or 'date' if it's a date without time
+    ];
     protected $guarded = [];
 
     // In Visitor model (Visitor.php)
@@ -27,6 +30,12 @@ class Visitors extends Model
     {
         return $this->belongsTo(Barangays::class, 'barangay_id');
     }
+
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class, 'visitor_id', 'id'); // Adjust foreign and local keys as per your schema
+    }
+
 
 
 

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BarangaysController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FeedbacksController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MunicipalitiesController;
 use App\Http\Controllers\OfficeController;
@@ -31,6 +33,9 @@ Route::get('/get-municipalities', [VisitorsController::class, 'getMunicipalities
 
 Route::get('/get-barangays', [VisitorsController::class, 'getBarangays'])->name('get.barangays');
 
+//feedbacks
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
 
 Route::get('/', function () {
     return view('login');
@@ -56,6 +61,12 @@ Route::middleware('auth')->group(function () {
 
     //office
     Route::get('/Office', [OfficeController::class, 'index'])->name('office');
+    Route::post('/Office/create', [OfficeController::class, 'store'])->name('store.office');
+
+    //visitor display page
+    Route::get('/visitors/display', [VisitorsController::class, 'displayPage'])->name('visitor.view');
+
+
 
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

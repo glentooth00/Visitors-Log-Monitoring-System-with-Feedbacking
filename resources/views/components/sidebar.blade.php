@@ -12,7 +12,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="text-white menu-item">
+            <a href="{{ route('visitor.view') }}" class="text-white menu-item">
                 <i class="fas fa-users"></i> Visitors
             </a>
         </li>
@@ -49,6 +49,11 @@
                         <i class="fas fa-plus-circle"></i> Add Office
                     </a>
                 </li>
+                {{-- <li>
+                    <a href="{{ route('feedbacks') }}" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Feedback items
+                    </a>
+                </li> --}}
                 {{-- <li>
                     <a href="#" class="text-white submenu-item">
                         <i class="fas fa-calendar-alt"></i> Yearly
