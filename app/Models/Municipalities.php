@@ -11,9 +11,20 @@ class Municipalities extends Model
 
     protected $guarded = [];
 
+    public function provinces()
+    {
+        return $this->belongsTo(Provinces::class);
+    }
+
     public function province()
-{
-    return $this->belongsTo(Provinces::class);
-}
+    {
+        return $this->belongsTo(Provinces::class);
+    }
+
+    public function barangays()
+    {
+        return $this->hasMany(Barangays::class);
+    }
+
 
 }
