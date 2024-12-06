@@ -20,8 +20,6 @@ class VisitorsController extends Controller
      */
     public function index()
     {
-
-
         $visitors = Visitors::get();
 
         $feedbacks = Feedback::all();
@@ -61,6 +59,15 @@ class VisitorsController extends Controller
             'municipalities' => $municipalities,
             'barangays' => $barangays,
             'offices' => $offices,
+        ]);
+    }
+
+    public function adminDashboard()
+    {
+        $visitorCount = Visitors::count();
+        return view('admin.dashboard', [
+            'visitorCount' => $visitorCount,
+
         ]);
     }
 

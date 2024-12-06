@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BarangaysController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashbooardController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FeedbacksController;
 use App\Http\Controllers\LoginController;
@@ -43,9 +45,14 @@ Route::get('/', function () {
 
 Route::post('/user/login', [LoginController::class, 'loginHandler'])->name('login');
 
+
+//GROUPS ONLY ACCESSIBLE BY USER ONCE LOGGED IN
+
+//MIDDLWARE- USED TO MANAGE LOGINS OF ADMIN ONLY NEED TO PASS THE USERNAME OR PASSWORD | EMAIL OR PASSWORD
+
 Route::middleware('auth')->group(function () {
 
-    Route::get('/Dashboard', [UsersController::class, 'index'])->name('admin.dashboard');
+    Route::get('/List', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     //province
     Route::get('/Add_Province', [ProvincesController::class, 'index'])->name('province');
@@ -65,6 +72,14 @@ Route::middleware('auth')->group(function () {
 
     //visitor display page
     Route::get('/visitors/display', [VisitorsController::class, 'displayPage'])->name('visitor.view');
+
+    //changepassword
+    Route::get('/users', [UsersController::class, 'index'])->name('change_password');
+    // In routes/web.php
+
+    Route::put('/change-password/{user}', [UsersController::class, 'update'])->name('users.update');
+
+
 
 
 
