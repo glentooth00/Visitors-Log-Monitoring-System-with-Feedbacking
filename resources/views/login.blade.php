@@ -15,7 +15,7 @@
     <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
         <!-- System Title -->
         <div class="text-center mb-4">
-            <h1 class="fw-bold">Visitors Log Monitoring System</h1>
+            <h1 class="fw-bold">Visitors Management System</h1>
             <h2 class="fw-bold">with Feedbacking</h2>
         </div>
 

@@ -1,7 +1,7 @@
 <!-- Sidebar Component -->
 <nav id="sidebar" class="">
     <div class="sidebar-header text-center py-3">
-        <h4 class="text-white" id="sidebarTitle">Visitors Log Monitoring System</h4>
+        <h4 class="text-white" id="sidebarTitle">Visitors Management System</h4>
         <h5 class="text-white" id="sidebarSubtitle">with Feedbacking</h5>
         <hr>
     </div>
