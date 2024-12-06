@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('includes.header')
 </head>
+
 <body>
     <!-- Main Wrapper with Flexbox -->
     <div id="app" class="d-flex">
@@ -10,7 +12,8 @@
         @include('components.sidebar')
 
         <!-- Page Content Wrapper with Flex Grow for dynamic width -->
-        <div id="content" class="flex-grow-1 p-4" style="min-height: 100vh; margin-left: 250px;"> <!-- Adjusted margin-left -->
+        <div id="content" class="flex-grow-1 p-4" style="min-height: 100vh; margin-left: 250px;">
+            <!-- Adjusted margin-left -->
             <!-- Main Content -->
             <main>
                 @yield('content') <!-- Page-specific content goes here -->
@@ -40,7 +43,8 @@
         }
 
         #content {
-            margin-left: 250px; /* Push content to the right side */
+            margin-left: 250px;
+            /* Push content to the right side */
             transition: all 0.3s;
             width: 100%;
         }
@@ -63,7 +67,8 @@
             color: #fff;
         }
 
-        .components a:hover, .components a:focus {
+        .components a:hover,
+        .components a:focus {
             background: #1074cb;
             color: #fff;
             text-decoration: none;
@@ -71,7 +76,8 @@
 
         /* Ensure content is left-aligned */
         #content main {
-            text-align: left;  /* Ensures the content is aligned to the left */
+            text-align: left;
+            /* Ensures the content is aligned to the left */
         }
     </style>
 
@@ -89,4 +95,5 @@
         });
     </script>
 </body>
+
 </html>
