@@ -1,13 +1,13 @@
 <!-- Sidebar Component -->
 <nav id="sidebar" class="">
     <div class="sidebar-header text-center py-3">
-        <h4 class="text-white" id="sidebarTitle">Visitors Log Monitoring System</h4>
+        <h4 class="text-white" id="sidebarTitle">Visitors Management System</h4>
         <h5 class="text-white" id="sidebarSubtitle">with Feedbacking</h5>
         <hr>
     </div>
     <ul class="list-unstyled components ml-3">
         <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" href="{{ route('admin.dashboard') }}">
                 <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
         </li>
@@ -47,6 +47,11 @@
                 <li>
                     <a href="{{ route('office') }}" class="text-white submenu-item">
                         <i class="fas fa-plus-circle"></i> Add Office
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('change_password') }}" class="text-white submenu-item">
+                        <i class="fas fa-plus-circle"></i> Change Password
                     </a>
                 </li>
                 {{-- <li>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Visitors extends Model
 {
     use HasFactory;
-
+    protected $table = 'visitors';
     protected $casts = [
         'visit_date' => 'datetime',  // or 'date' if it's a date without time
     ];
