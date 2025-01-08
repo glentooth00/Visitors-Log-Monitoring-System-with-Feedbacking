@@ -42,6 +42,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Client Type</th>
                     <th>Phone</th>
                     <th>Purpose</th>
                     <th>Address</th>
@@ -53,6 +54,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $visitor->visitor_name }}</td>
+                        <td>{{ $visitor->client_type }}</td>
                         <td>{{ $visitor->visitor_phone_no }}</td>
                         <td>{{ $visitor->visitor_purpose }}</td>
                         <td>
@@ -116,6 +118,36 @@
                     <form action="{{ route('store.visitor') }}" method="POST">
                         @csrf
                         <div class="modal-body">
+
+                            <div class="form-group mb-3">
+                                <label for="name">Clients</label><br>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="client_type" value="Alumni"
+                                        required>
+                                    <label class="form-check-label">Alumni</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="client_type" value="Old Student"
+                                        required>
+                                    <label class="form-check-label">Old Student</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="client_type" value="Parent"
+                                        required>
+                                    <label class="form-check-label">Parent</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="client_type" value="Guardian"
+                                        required>
+                                    <label class="form-check-label">Guardian</label>
+                                </div>
+                            </div>
+
+
                             <div class="form-group mb-3">
                                 <label for="name">Full Name</label>
                                 <input type="text" name="visitor_name" id="name" class="form-control" required>
@@ -159,7 +191,8 @@
                                     <select name="municipality_id" id="municipality" class="form-control" required>
                                         <option value="" selected disabled hidden>Select Municipality</option>
                                         @foreach ($municipalities as $municipality)
-                                            <option value="{{ $municipality->id }}">{{ $municipality->municipality_name }}
+                                            <option value="{{ $municipality->id }}">
+                                                {{ $municipality->municipality_name }}
                                             </option>
                                         @endforeach
                                     </select>
