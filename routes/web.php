@@ -57,14 +57,26 @@ Route::middleware('auth')->group(function () {
     //province
     Route::get('/Add_Province', [ProvincesController::class, 'index'])->name('province');
     Route::post('/save/province', [ProvincesController::class, 'store'])->name('store.province');
+    Route::put('/provinces/{id}', [ProvincesController::class, 'update'])->name('province.update');
+    Route::delete('/provinces/{id}', [ProvincesController::class, 'destroy'])->name('province.destroy');
+
+
 
     //municipality
     Route::get('/municipalities', [MunicipalitiesController::class, 'index'])->name('municipality');
     Route::post('/municipalities/store', [MunicipalitiesController::class, 'store'])->name('store.municipality');
+    Route::get('municipalities/{municipality}/edit', [MunicipalitiesController::class, 'edit'])->name('municipalities.edit');
+    Route::put('municipalities/{id}', [MunicipalitiesController::class, 'update'])->name('municipalities.update');
+    Route::delete('municipalities/{municipality}', [MunicipalitiesController::class, 'destroy'])->name('municipalities.destroy');
 
     //barangays
     Route::get('/Barangays', [BarangaysController::class, 'index'])->name('barangays');
     Route::post('/Barangays/Store', [BarangaysController::class, 'store'])->name('store.barangay');
+    Route::put('/barangays/{barangay}', [BarangaysController::class, 'update'])->name('barangays.update');
+    Route::delete('/barangays/{id}', [BarangaysController::class, 'destroy'])->name('barangays.destroy');
+
+
+
 
     //office
     Route::get('/Office', [OfficeController::class, 'index'])->name('office');

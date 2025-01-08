@@ -95,6 +95,7 @@ class VisitorsController extends Controller
         $validated = $request->validate([
             'visitor_name' => 'required|string|max:255',
             'visitor_phone_no' => 'required|string|max:255', // Validates phone number
+            'client_type' => 'required|string|max:255',
             'visitor_purpose' => 'required|string|max:500',
             'visit_date' => 'required|date',
             'province_id' => 'required|exists:provinces,id', // Validates that the selected province exists

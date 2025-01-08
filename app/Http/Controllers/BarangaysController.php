@@ -12,7 +12,7 @@ class BarangaysController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * 
+     *
      */
     public function index()
     {
@@ -31,7 +31,7 @@ class BarangaysController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * 
+     *
      */
     public function create()
     {
@@ -42,7 +42,7 @@ class BarangaysController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * 
+     *
      */
     public function store(Request $request)
     {
@@ -69,7 +69,7 @@ class BarangaysController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Barangays  $barangays
-     * 
+     *
      */
     public function show(Barangays $barangays)
     {
@@ -80,7 +80,7 @@ class BarangaysController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Barangays  $barangays
-     * 
+     *
      */
     public function edit(Barangays $barangays)
     {
@@ -90,23 +90,48 @@ class BarangaysController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Barangays  $barangays
-     * 
+
+     *
      */
-    public function update(Request $request, Barangays $barangays)
+    public function update(Request $request, $id)
     {
-        //
+        // Validate incoming request
+        $validatedData = $request->validate([
+            'barangay_name' => 'required|string|max:255'
+        ]);
+
+        // Find the barangay by ID
+        $barangay = Barangays::findOrFail($id);
+
+        // Update barangay details
+        $barangay->update([
+            'barangay_name' => $validatedData['barangay_name'],
+        ]);
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Barangay updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Barangays  $barangays
-     * 
+     *
      */
-    public function destroy(Barangays $barangays)
+    public function destroy($id)
     {
-        //
+        // Find the barangay by ID
+        $barangay = Barangays::findOrFail($id);
+
+        // Delete the barangay
+        $barangay->delete();
+
+        // Return a JSON response for AJAX
+        return response()->json([
+            'success' => true,
+            'message' => 'Barangay deleted successfully.',
+        ]);
     }
+
+
 }
