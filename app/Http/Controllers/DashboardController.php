@@ -10,6 +10,7 @@ use App\Models\Provinces;
 use App\Models\Visitors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -21,20 +22,46 @@ class DashboardController extends Controller
 
 
      public function index()
-     {
-         $visitorCount = Visitors::count(); // all-time visitors
-         $Provinces = Provinces::get();
+{
+    $visitorCount = Visitors::count();
+    $Provinces = Provinces::get();
 
-         $todayVisitors = Visitors::whereDate('created_at', Carbon::today())->get();
-         $todayVisitorCount = $todayVisitors->count(); // 👉 count today's visitors
+    $todayVisitors = Visitors::whereDate('created_at', Carbon::today())->get();
+    $todayVisitorCount = $todayVisitors->count();
 
-         return view('admin.dashboard', [
-             'visitorCount' => $visitorCount,
-             'Provinces' => $Provinces,
-             'todayVisitors' => $todayVisitors,
-             'todayVisitorCount' => $todayVisitorCount,
-         ]);
-     }
+    // Additional summaries
+    $visitorsPerOffice = Visitors::select('office', DB::raw('count(*) as total'))
+                        ->groupBy('office')
+                        ->orderBy('total', 'desc')
+                        ->get();
+
+    $visitorsPerProvince = Visitors::select('province_id', DB::raw('count(*) as total'))
+                        ->groupBy('province_id')
+                        ->orderBy('total', 'desc')
+                        ->get();
+
+    $visitorsPerClientType = Visitors::select('client_type', DB::raw('count(*) as total'))
+                        ->groupBy('client_type')
+                        ->orderBy('total', 'desc')
+                        ->get();
+
+    $monthlyVisitors = Visitors::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+    ->groupBy('month')
+    ->orderBy('month')
+    ->get();
+
+
+    return view('admin.dashboard', [
+        'visitorCount' => $visitorCount,
+        'Provinces' => $Provinces,
+        'todayVisitors' => $todayVisitors,
+        'todayVisitorCount' => $todayVisitorCount,
+        'visitorsPerOffice' => $visitorsPerOffice,
+        'visitorsPerProvince' => $visitorsPerProvince,
+        'visitorsPerClientType' => $visitorsPerClientType,
+        'monthlyVisitors'=> $monthlyVisitors,
+    ]);
+}
 
 
     /**
