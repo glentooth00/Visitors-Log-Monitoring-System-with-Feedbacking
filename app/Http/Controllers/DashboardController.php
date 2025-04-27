@@ -16,28 +16,31 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * 
+     *
      */
-    public function index()
-    {
-        $visitorCount = Visitors::count();
-        // count total visitors 
 
-        $Provinces = Provinces::get();
 
-        return view(
-            'admin.dashboard',
-            [
-                'visitorCount' => $visitorCount,
-                'Provinces' => $Provinces,
-            ]
-        );
-    }
+     public function index()
+     {
+         $visitorCount = Visitors::count(); // all-time visitors
+         $Provinces = Provinces::get();
+
+         $todayVisitors = Visitors::whereDate('created_at', Carbon::today())->get();
+         $todayVisitorCount = $todayVisitors->count(); // 👉 count today's visitors
+
+         return view('admin.dashboard', [
+             'visitorCount' => $visitorCount,
+             'Provinces' => $Provinces,
+             'todayVisitors' => $todayVisitors,
+             'todayVisitorCount' => $todayVisitorCount,
+         ]);
+     }
+
 
     /**
      * Show the form for creating a new resource.
      *
-     * 
+     *
      */
     public function create()
     {
@@ -48,7 +51,7 @@ class DashboardController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * 
+     *
      */
     public function store(Request $request)
     {
@@ -59,7 +62,7 @@ class DashboardController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * 
+     *
      */
     public function show($id)
     {
@@ -70,7 +73,7 @@ class DashboardController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * 
+     *
      */
     public function edit($id)
     {
@@ -82,7 +85,7 @@ class DashboardController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * 
+     *
      */
     public function update(Request $request, $id)
     {

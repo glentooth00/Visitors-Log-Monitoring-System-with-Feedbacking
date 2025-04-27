@@ -139,12 +139,13 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $label }}</td>
                                         @for ($i = 5; $i >= 1; $i--)
-                                            <td>
-                                                <input type="radio" name="{{ $field }}"
-                                                    value="{{ $i }}" disabled
-                                                    {{ $visitor->{$field} == $i ? 'checked' : '' }}>
-                                            </td>
-                                        @endfor
+                                        <td>
+                                            <input type="radio" name="{{ $field }}"
+                                                value="{{ $i }}" disabled
+                                                {{ isset($visitors->{$field}) && $visitors->{$field} == $i ? 'checked' : '' }}>
+                                        </td>
+                                    @endfor
+
                                     </tr>
                                 @endforeach
 
@@ -157,12 +158,13 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $label }}</td>
                                         @for ($i = 5; $i >= 1; $i--)
-                                            <td>
-                                                <input type="radio" name="{{ $field }}"
-                                                    value="{{ $i }}" disabled
-                                                    {{ $visitor->{$field} == $i ? 'checked' : '' }}>
-                                            </td>
-                                        @endfor
+                                        <td>
+                                            <input type="radio" name="{{ $field }}"
+                                                value="{{ $i }}" disabled
+                                                {{ isset($visitor->{$field}) && $visitor->{$field} == $i ? 'checked' : '' }}>
+                                        </td>
+                                    @endfor
+
                                     </tr>
                                 @endforeach
 
@@ -175,12 +177,13 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $label }}</td>
                                         @for ($i = 5; $i >= 1; $i--)
-                                            <td>
-                                                <input type="radio" name="{{ $field }}"
-                                                    value="{{ $i }}" disabled
-                                                    {{ $visitor->{$field} == $i ? 'checked' : '' }}>
-                                            </td>
-                                        @endfor
+                                        <td>
+                                            <input type="radio" name="{{ $field }}"
+                                                value="{{ $i }}" disabled
+                                                {{ isset($visitor->{$field}) && $visitor->{$field} == $i ? 'checked' : '' }}>
+                                        </td>
+                                    @endfor
+
                                     </tr>
                                 @endforeach
                             </tbody>

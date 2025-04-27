@@ -15,9 +15,18 @@
                     </div>
                 </div>
             </div>
-            {{--  --}}
 
-
+            <!-- Today's Visitors Count Card -->
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Visitors Today</h5>
+                        <p class="card-text display-4">{{ $todayVisitorCount }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
 @endsection
