@@ -10,34 +10,64 @@ use App\Models\Provinces;
 use App\Models\Visitors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * 
+     *
      */
-    public function index()
-    {
-        $visitorCount = Visitors::count();
-        // count total visitors 
 
-        $Provinces = Provinces::get();
 
-        return view(
-            'admin.dashboard',
-            [
-                'visitorCount' => $visitorCount,
-                'Provinces' => $Provinces,
-            ]
-        );
-    }
+     public function index()
+{
+    $visitorCount = Visitors::count();
+    $Provinces = Provinces::get();
+
+    $todayVisitors = Visitors::whereDate('created_at', Carbon::today())->get();
+    $todayVisitorCount = $todayVisitors->count();
+
+    // Additional summaries
+    $visitorsPerOffice = Visitors::select('office', DB::raw('count(*) as total'))
+                        ->groupBy('office')
+                        ->orderBy('total', 'desc')
+                        ->get();
+
+    $visitorsPerProvince = Visitors::select('province_id', DB::raw('count(*) as total'))
+                        ->groupBy('province_id')
+                        ->orderBy('total', 'desc')
+                        ->get();
+
+    $visitorsPerClientType = Visitors::select('client_type', DB::raw('count(*) as total'))
+                        ->groupBy('client_type')
+                        ->orderBy('total', 'desc')
+                        ->get();
+
+    $monthlyVisitors = Visitors::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+    ->groupBy('month')
+    ->orderBy('month')
+    ->get();
+
+
+    return view('admin.dashboard', [
+        'visitorCount' => $visitorCount,
+        'Provinces' => $Provinces,
+        'todayVisitors' => $todayVisitors,
+        'todayVisitorCount' => $todayVisitorCount,
+        'visitorsPerOffice' => $visitorsPerOffice,
+        'visitorsPerProvince' => $visitorsPerProvince,
+        'visitorsPerClientType' => $visitorsPerClientType,
+        'monthlyVisitors'=> $monthlyVisitors,
+    ]);
+}
+
 
     /**
      * Show the form for creating a new resource.
      *
-     * 
+     *
      */
     public function create()
     {
@@ -48,7 +78,7 @@ class DashboardController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * 
+     *
      */
     public function store(Request $request)
     {
@@ -59,7 +89,7 @@ class DashboardController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * 
+     *
      */
     public function show($id)
     {
@@ -70,7 +100,7 @@ class DashboardController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * 
+     *
      */
     public function edit($id)
     {
@@ -82,7 +112,7 @@ class DashboardController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * 
+     *
      */
     public function update(Request $request, $id)
     {

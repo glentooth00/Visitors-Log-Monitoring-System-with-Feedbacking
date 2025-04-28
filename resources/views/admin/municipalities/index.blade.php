@@ -124,7 +124,7 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <form id="editMunicipalityForm" method="POST"
-                action="{{ route('municipalities.update', $municipality->id) }}">
+                action="{{ route('municipalities.update', $municipality->id ?? '') }}">
                 @csrf
                 @method('PUT')
                 <div class="modal-content">

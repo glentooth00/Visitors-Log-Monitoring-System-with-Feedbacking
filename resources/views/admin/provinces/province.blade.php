@@ -90,7 +90,7 @@
                         <h5 class="modal-title" id="editProvinceModalLabel">Edit Province</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="editProvinceForm" method="POST" action="{{ route('province.update', $province->id) }}">
+                    <form id="editProvinceForm" method="POST" action="{{ route('province.update', $province->id ?? '') }}">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
