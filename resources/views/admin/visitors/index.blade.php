@@ -47,9 +47,9 @@
             </div>
             <div class="card-body">
 
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#visitorModal">
+                {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#visitorModal">
                     Add Visitor
-                </button>
+                </button> --}}
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -88,10 +88,10 @@
                                         Feedback
                                     </button> --}}
                                 @else
-                                    <span class="display-3 badge badge-success text-submitted"
+                                    {{-- <span class="display-3 badge badge-success text-submitted"
                                         style="font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
                                         Feedback submitted
-                                    </span>
+                                    </span> --}}
                                 @endif
                                 </td>
                             </tr>

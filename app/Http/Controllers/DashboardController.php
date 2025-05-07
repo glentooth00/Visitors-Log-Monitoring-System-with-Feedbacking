@@ -21,47 +21,57 @@ class DashboardController extends Controller
      */
 
 
-     public function index()
-{
-    $visitorCount = Visitors::count();
-    $Provinces = Provinces::get();
+    public function index()
+    {
+        $visitorCount = Visitors::count();
+        $Provinces = Provinces::get();
+        $provinces = Provinces::all();
 
-    $todayVisitors = Visitors::whereDate('created_at', Carbon::today())->get();
-    $todayVisitorCount = $todayVisitors->count();
+        $offices = Office::all();
 
-    // Additional summaries
-    $visitorsPerOffice = Visitors::select('office', DB::raw('count(*) as total'))
-                        ->groupBy('office')
-                        ->orderBy('total', 'desc')
-                        ->get();
+        $municipalities = Municipalities::with('province')->get();
+        $barangays = Barangays::with('municipality.province')->get();
 
-    $visitorsPerProvince = Visitors::select('province_id', DB::raw('count(*) as total'))
-                        ->groupBy('province_id')
-                        ->orderBy('total', 'desc')
-                        ->get();
+        $todayVisitors = Visitors::whereDate('created_at', Carbon::today())->get();
+        $todayVisitorCount = $todayVisitors->count();
 
-    $visitorsPerClientType = Visitors::select('client_type', DB::raw('count(*) as total'))
-                        ->groupBy('client_type')
-                        ->orderBy('total', 'desc')
-                        ->get();
+        // Additional summaries
+        $visitorsPerOffice = Visitors::select('office', DB::raw('count(*) as total'))
+            ->groupBy('office')
+            ->orderBy('total', 'desc')
+            ->get();
 
-    $monthlyVisitors = Visitors::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
-    ->groupBy('month')
-    ->orderBy('month')
-    ->get();
+        $visitorsPerProvince = Visitors::select('province_id', DB::raw('count(*) as total'))
+            ->groupBy('province_id')
+            ->orderBy('total', 'desc')
+            ->get();
+
+        $visitorsPerClientType = Visitors::select('client_type', DB::raw('count(*) as total'))
+            ->groupBy('client_type')
+            ->orderBy('total', 'desc')
+            ->get();
+
+        $monthlyVisitors = Visitors::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
 
 
-    return view('admin.dashboard', [
-        'visitorCount' => $visitorCount,
-        'Provinces' => $Provinces,
-        'todayVisitors' => $todayVisitors,
-        'todayVisitorCount' => $todayVisitorCount,
-        'visitorsPerOffice' => $visitorsPerOffice,
-        'visitorsPerProvince' => $visitorsPerProvince,
-        'visitorsPerClientType' => $visitorsPerClientType,
-        'monthlyVisitors'=> $monthlyVisitors,
-    ]);
-}
+        return view('admin.dashboard', [
+            'visitorCount' => $visitorCount,
+            'Provinces' => $Provinces,
+            'todayVisitors' => $todayVisitors,
+            'todayVisitorCount' => $todayVisitorCount,
+            'visitorsPerOffice' => $visitorsPerOffice,
+            'visitorsPerProvince' => $visitorsPerProvince,
+            'visitorsPerClientType' => $visitorsPerClientType,
+            'monthlyVisitors' => $monthlyVisitors,
+            'offices' => $offices,
+            'provinces' => $provinces,
+            'municipalities' => $municipalities,
+            'barangays' => $barangays,
+        ]);
+    }
 
 
     /**
