@@ -42,10 +42,6 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Client Type</th>
-                    <th>Phone</th>
-                    <th>Purpose</th>
-                    <th>Address</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -54,7 +50,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $visitor->visitor_name }}</td>
-                        <td>{{ $visitor->client_type }}</td>
+                        {{-- <td>{{ $visitor->client_type }}</td>
                         <td>{{ $visitor->visitor_phone_no }}</td>
                         <td>{{ $visitor->visitor_purpose }}</td>
                         <td>
@@ -67,7 +63,7 @@
                             @if ($visitor->province)
                                 {{ $visitor->province->province_name }}
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
 
                             @if (empty($visitor->feedback_status))

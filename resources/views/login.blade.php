@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <div class="p-1">
+        <a href="{{ route('visitor') }}">Visitor?</a>
+    </div>
     <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
         <!-- System Title -->
         <div class="text-center mb-4">

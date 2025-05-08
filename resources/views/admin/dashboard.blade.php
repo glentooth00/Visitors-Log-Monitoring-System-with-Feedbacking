@@ -50,9 +50,8 @@
                             <th>Visitor Name</th>
                             <th>Visitor Phone No.</th>
                             <th>Visitor Purpose</th>
-                            <th>Office of Transaction</th>
                             <th>Client Type</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -68,11 +67,11 @@
                                 <td>{{ $visitor->client_type }}</td>
                                 <td>
                                     @if (empty($visitor->feedback_status))
-                                <button class="btn btn-success btn-sm feedback-btn" data-id="{{ $visitor->id }}"
+                                {{-- <button class="btn btn-success btn-sm feedback-btn" data-id="{{ $visitor->id }}"
                                     data-date="{{ $visitor->visit_date }}" data-time="{{ $visitor->visit_time }}"
                                     data-bs-toggle="modal" data-bs-target="#feedbackModal">
                                     Feedback
-                                </button>
+                                </button> --}}
                             @else
                                 <span class="display-3 badge badge-success text-submitted"
                                     style="font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
