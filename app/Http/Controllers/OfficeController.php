@@ -10,7 +10,7 @@ class OfficeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * 
+     *
      */
     public function index()
     {
@@ -18,10 +18,13 @@ class OfficeController extends Controller
         return view('admin.offices.index', ['offices' => $offices]);
     }
 
+
+
+
     /**
      * Show the form for creating a new resource.
      *
-     * 
+     *
      */
     public function create()
     {
@@ -32,7 +35,7 @@ class OfficeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * 
+     *
      */
     public function store(Request $request)
     {
@@ -50,7 +53,7 @@ class OfficeController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Office  $office
-     * 
+     *
      */
     public function show(Office $office)
     {
@@ -61,7 +64,7 @@ class OfficeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Office  $office
-     * 
+     *
      */
     public function edit(Office $office)
     {
@@ -73,7 +76,7 @@ class OfficeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Office  $office
-     * 
+     *
      */
     public function update(Request $request, Office $office)
     {
@@ -84,7 +87,7 @@ class OfficeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Office  $office
-     * 
+     *
      */
     public function destroy(Office $office)
     {

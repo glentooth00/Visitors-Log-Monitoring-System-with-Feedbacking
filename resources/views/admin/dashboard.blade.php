@@ -39,7 +39,7 @@
                     Add Visitor
                 </button>
             </div>
-            
+
             <div class="card-body table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -322,36 +322,36 @@
                 <form action="{{ route('store.visitor') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-    
+
                         <div class="form-group mb-3">
                             <label for="name">Clients</label><br>
-    
+
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="client_type" value="Alumni"
                                     required>
                                 <label class="form-check-label">Alumni</label>
                             </div>
-    
+
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="client_type" value="Old Student"
                                     required>
                                 <label class="form-check-label">Old Student</label>
                             </div>
-    
+
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="client_type" value="Parent"
                                     required>
                                 <label class="form-check-label">Parent</label>
                             </div>
-    
+
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="client_type" value="Guardian"
                                     required>
                                 <label class="form-check-label">Guardian</label>
                             </div>
                         </div>
-    
-    
+
+
                         <div class="form-group mb-3">
                             <label for="name">Full Name</label>
                             <input type="text" name="visitor_name" id="name" class="form-control" required>
@@ -360,7 +360,7 @@
                             <label for="phone">Phone</label>
                             <input type="text" name="visitor_phone_no" id="phone" class="form-control" required>
                         </div>
-    
+
                         <!-- Offices Section -->
                         <div class="form-group mb-3">
                             <label>Offices</label>
@@ -375,7 +375,7 @@
                                 @endforeach
                             </div>
                         </div>
-    
+
                         <!-- Row for dropdowns -->
                         <div class="row">
                             <!-- Province Dropdown -->
@@ -388,7 +388,7 @@
                                     @endforeach
                                 </select>
                             </div>
-    
+
                             <!-- Municipality Dropdown -->
                             <div class="col-md-4">
                                 <label for="municipality">Municipality</label>
@@ -409,7 +409,7 @@
                                 </select>
                             </div>
                         </div>
-    
+
                         <div class="form-group mb-3">
                             <label for="purpose">Purpose of Visit</label>
                             <textarea name="visitor_purpose" id="purpose" class="form-control" rows="3" required></textarea>

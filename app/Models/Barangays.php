@@ -11,6 +11,9 @@ class Barangays extends Model
 
     protected $guarded = [];
 
+
+
+
     public function province()
     {
         return $this->belongsTo(Provinces::class);

@@ -50,6 +50,16 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $visitor->visitor_name }}</td>
+                        @php
+                            $office = json_decode($visitor->office, true);
+                        @endphp
+
+                        <td>{{ is_array($office) ? implode(', ', $office) : $visitor->office }}</td>
+
+
+
+
+
                         {{-- <td>{{ $visitor->client_type }}</td>
                         <td>{{ $visitor->visitor_phone_no }}</td>
                         <td>{{ $visitor->visitor_purpose }}</td>
@@ -67,17 +77,37 @@
                         <td>
 
                             @if (empty($visitor->feedback_status))
-                                <button class="btn btn-success btn-sm feedback-btn" data-id="{{ $visitor->id }}"
+
+
+                            <div class="d-flex gap-2" style="width:20em;">
+                                 <button class="btn btn-success btn-sm feedback-btn" data-id="{{ $visitor->id }}"
                                     data-date="{{ $visitor->visit_date }}" data-time="{{ $visitor->visit_time }}"
                                     data-bs-toggle="modal" data-bs-target="#feedbackModal">
                                     Feedback
                                 </button>
+
+                                 <button class="btn btn-dark btn-sm feedback-btn"
+                                        data-id="{{ $visitor->id }}"
+                                        data-date="{{ $visitor->visit_date }}"
+                                        data-time="{{ $visitor->visit_time }}"
+                                        data-offices='@json(json_decode($visitor->office))'
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#officeModal">
+                                    Submit Office Feedback
+                                </button>
+
+                            </div>
+
+
+
                             @else
                                 <span class="display-3 badge badge-success text-submitted"
                                     style="font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
                                     Feedback submitted
                                 </span>
                             @endif
+
+
 
                             {{-- @foreach ($feedbacks as $feedback)
                                 @if ($feedback->status == 1)
@@ -102,6 +132,63 @@
                 @endforeach
             </tbody>
         </table>
+
+
+        <!--office Modal -->
+<!-- Office Modal -->
+<div class="modal fade" id="officeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Submit Office Feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('submit.feedback') }}" method="POST">
+          @csrf
+          <input type="hidden" name="visitor_id" value="{{ $visitor->id }}">
+          <input type="hidden" name="visit_date" value="{{ $visitor->visit_date }}">
+          <input type="hidden" name="visit_time" value="{{ $visitor->visit_time }}">
+
+          <table class="table table-bordered text-center">
+            <thead class="table-light">
+              <tr>
+                <th>Office</th>
+                <th>5</th>
+                <th>4</th>
+                <th>3</th>
+                <th>2</th>
+                <th>1</th>
+              </tr>
+            </thead>
+            <tbody id="ratingTableBody">
+              @foreach (json_decode($visitor->office) as $office)
+                <tr>
+                  <td>{{ $office }}</td>
+                  <td><input type="radio" name="rating[{{ $office }}]" value="5"></td>
+                  <td><input type="radio" name="rating[{{ $office }}]" value="4"></td>
+                  <td><input type="radio" name="rating[{{ $office }}]" value="3"></td>
+                  <td><input type="radio" name="rating[{{ $office }}]" value="2"></td>
+                  <td><input type="radio" name="rating[{{ $office }}]" value="1"></td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save Feedback</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+
 
         {{-- modal form --}}
         <div class="modal fade" id="visitorModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">
@@ -476,4 +563,43 @@
             if (visitTime) document.getElementById('hiddenTime').value = visitTime;
         });
     });
+
+
+
+//office modal rating
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.feedback-btn').forEach(button => {
+      button.addEventListener('click', function () {
+        const offices = JSON.parse(this.getAttribute('data-offices') || '[]');
+        const tbody = document.getElementById('ratingTableBody');
+        tbody.innerHTML = ''; // Clear previous content
+
+        if (offices.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6">No office data available.</td></tr>';
+          return;
+        }
+
+        offices.forEach((office, index) => {
+          const tr = document.createElement('tr');
+
+          let rowHTML = `<td><strong>${office}</strong></td>`;
+          for (let point = 5; point >= 1; point--) {
+            rowHTML += `
+              <td>
+                <input type="radio" name="ratings[${office}]" value="${point}" required>
+              </td>`;
+          }
+
+          tr.innerHTML = rowHTML;
+          tbody.appendChild(tr);
+        });
+      });
+    });
+  });
+
+
+
+
 </script>
+
