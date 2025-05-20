@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\BarangaysController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashbooardController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FeedbacksController;
 use App\Http\Controllers\LoginController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ProvincesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VisitorsController;
+use App\Http\Controllers\VisitorController;
 use App\Models\Visitors;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::post('/visitors/rating', [VisitorController::class, 'storeVisitor'])->name('store.rating');
 
 Route::get('/visitors', [VisitorsController::class, 'index'])->name('visitor');
 
