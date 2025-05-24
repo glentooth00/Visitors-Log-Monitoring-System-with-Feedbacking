@@ -35,9 +35,9 @@
             </div>
 
             <div class="p-2">
-                <button class="btn btn-primary w-25 mt-2" data-bs-toggle="modal" data-bs-target="#visitorModal">
+                {{-- <button class="btn btn-primary w-25 mt-2" data-bs-toggle="modal" data-bs-target="#visitorModal">
                     Add Visitor
-                </button>
+                </button> --}}
             </div>
 
             <div class="card-body table-responsive">

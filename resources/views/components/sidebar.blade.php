@@ -16,6 +16,11 @@
                 <i class="fas fa-users"></i> Visitors
             </a>
         </li>
+         <li>
+            <a href="{{ route('feedback.view') }}" class="text-white menu-item">
+                <i class="fas fa-users"></i> Feedbacks
+            </a>
+        </li>
 
         <!-- Settings Submenu -->
         <li>

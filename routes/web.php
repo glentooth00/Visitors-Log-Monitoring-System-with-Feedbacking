@@ -92,9 +92,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/change-password/{user}', [UsersController::class, 'update'])->name('users.update');
 
 
-Route::post('/submit-feedback', [FeedbackController::class, 'submitFeedback'])->name('submit.feedback');
+    Route::post('/submit-feedback', [FeedbackController::class, 'submitFeedback'])->name('submit.feedback');
 
-
+    Route::get('/view-feedback', [FeedbackController::class, 'index'])->name('feedback.view');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

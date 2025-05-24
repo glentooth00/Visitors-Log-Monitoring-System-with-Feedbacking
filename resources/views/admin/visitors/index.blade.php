@@ -58,7 +58,7 @@
                             <th>Purpose of Visit</th>
                             <th>Contact Number</th>
                             <th>Visit Date/Time</th>
-                            <th>Actions</th>
+                            <th style="width:20px;">Office visited</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,29 +70,7 @@
                                 <td>{{ $visitor->visitor_phone_no }}</td>
                                 <td>{{ $visitor->visit_date->format('M-d-Y') }} / {{ $visitor->visit_time }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#viewVisitorModal" data-id="{{ $visitor->id }}"
-                                        data-name="{{ $visitor->visitor_name }}"
-                                        data-purpose="{{ $visitor->visitor_purpose }}"
-                                        data-phone="{{ $visitor->visitor_phone_no }}"
-                                        data-visit-date="{{ $visitor->visit_date->format('M-d-Y') }}"
-                                        data-visit-time="{{ $visitor->visit_time }}"
-                                        data-feedback="{{ $visitor->feedback ? json_encode($visitor->feedback->toArray()) : '{}' }}">
-                                        View
-                                    </button>
-
-                                    @if (empty($visitor->feedback_status))
-                                    {{-- <button class="btn btn-success btn-sm feedback-btn" data-id="{{ $visitor->id }}"
-                                        data-date="{{ $visitor->visit_date }}" data-time="{{ $visitor->visit_time }}"
-                                        data-bs-toggle="modal" data-bs-target="#feedbackModal">
-                                        Feedback
-                                    </button> --}}
-                                @else
-                                    {{-- <span class="display-3 badge badge-success text-submitted"
-                                        style="font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-                                        Feedback submitted
-                                    </span> --}}
-                                @endif
+                                    {{ $visitor->office }}
                                 </td>
                             </tr>
                         @empty

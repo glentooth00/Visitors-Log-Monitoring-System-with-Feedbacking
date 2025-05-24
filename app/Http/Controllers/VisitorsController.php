@@ -76,7 +76,7 @@ class VisitorsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * 
+     *
      */
     public function create()
     {
@@ -87,7 +87,7 @@ class VisitorsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * 
+     *
      */
     public function store(Request $request)
     {
@@ -155,7 +155,7 @@ class VisitorsController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Visitors  $visitors
-     * 
+     *
      */
     public function show(Visitors $visitors)
     {
@@ -168,7 +168,7 @@ class VisitorsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Visitors  $visitors
-     * 
+     *
      */
     public function edit(Visitors $visitors)
     {
@@ -180,7 +180,7 @@ class VisitorsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Visitors  $visitors
-     * 
+     *
      */
     public function update(Request $request, Visitors $visitors)
     {
@@ -191,7 +191,7 @@ class VisitorsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Visitors  $visitors
-     * 
+     *
      */
     public function destroy(Visitors $visitors)
     {

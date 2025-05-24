@@ -32,8 +32,11 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="mb-0"></h3>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#visitorModal">
-                Add Visitor
+               Feedback
             </button>
+             <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#visitModal">
+                    Add Visitor
+                </button>
         </div>
 
         <!-- Visitor Table -->
@@ -42,7 +45,8 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Action</th>
+                    <th>OFfice visited</th>
+                    {{-- <th>Action</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +80,7 @@
                         </td> --}}
                         <td>
 
-                            @if (empty($visitor->feedback_status))
+                            {{-- @if (empty($visitor->feedback_status))
 
 
                             <div class="d-flex gap-2" style="width:20em;">
@@ -105,7 +109,7 @@
                                     style="font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
                                     Feedback submitted
                                 </span>
-                            @endif
+                            @endif --}}
 
 
 
@@ -133,6 +137,126 @@
             </tbody>
         </table>
 
+
+        <!-- visitor mdoal -->
+            <div class="modal fade" id="visitModal" tabindex="-1" aria-labelledby="visitorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="visitorModalLabel">Add Visitor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('store.visitor') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+
+                        <div class="form-group mb-3">
+                            <label for="name">Clients</label><br>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="client_type" value="Alumni"
+                                    required>
+                                <label class="form-check-label">Alumni</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="client_type" value="Old Student"
+                                    required>
+                                <label class="form-check-label">Old Student</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="client_type" value="Parent"
+                                    required>
+                                <label class="form-check-label">Parent</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="client_type" value="Guardian"
+                                    required>
+                                <label class="form-check-label">Guardian</label>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label for="name">Full Name</label>
+                            <input type="text" name="visitor_name" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="phone">Phone</label>
+                            <input type="text" name="visitor_phone_no" id="phone" class="form-control" required>
+                        </div>
+
+                        <!-- Offices Section -->
+                        <div class="form-group mb-3">
+                            <label>Offices</label>
+                            <div class="d-flex flex-wrap">
+                                @foreach ($offices as $office)
+                                    <div class="form-check me-3">
+                                        <input type="checkbox" class="form-check-input" id="office_{{ $office->id }}"
+                                            name="office[]" value="{{ $office->office_name }}">
+                                        <label class="form-check-label"
+                                            for="office_{{ $office->id }}">{{ $office->office_name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Row for dropdowns -->
+                        <div class="row">
+                            <!-- Province Dropdown -->
+                            <div class="col-md-4">
+                                <label for="province">Province</label>
+                                <select name="province_id" id="province" class="form-control" required>
+                                    <option value="" selected disabled hidden>Select Province</option>
+                                    @foreach ($provinces as $province)
+                                        <option value="{{ $province->id }}">{{ $province->province_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Municipality Dropdown -->
+                            <div class="col-md-4">
+                                <label for="municipality">Municipality</label>
+                                <select name="municipality_id" id="municipality" class="form-control" required>
+                                    <option value="" selected disabled hidden>Select Municipality</option>
+                                    @foreach ($municipalities as $municipality)
+                                        <option value="{{ $municipality->id }}">
+                                            {{ $municipality->municipality_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <!-- Barangay Dropdown -->
+                            <div class="col-md-4">
+                                <label for="barangay">Barangay</label>
+                                <select name="barangay_id" id="barangay" class="form-control" required>
+                                    <option value="" selected disabled hidden>Select Barangay</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="purpose">Purpose of Visit</label>
+                            <textarea name="visitor_purpose" id="purpose" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="visit_date">Date of Visit</label>
+                            <input type="date" name="visit_date" id="visit_date" class="form-control" required>
+                        </div>
+                        {{-- <div class="form-group mb-3">
+                            <label for="visit_time">Time of Visit</label>
+                            <input type="time" name="visit_time" id="visit_time" class="form-control" required>
+                        </div> --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
         <!--office Modal -->
 <!-- Office Modal -->

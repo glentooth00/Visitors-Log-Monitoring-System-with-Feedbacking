@@ -6,6 +6,9 @@ use App\Models\Feedback;
 use App\Models\Visitors;
 use App\Models\OfficeFeedback;
 use Illuminate\Http\Request;
+use App\Models\Office;
+use App\Models\Provinces;
+use App\Models\Municipalities;
 
 class FeedbackController extends Controller
 {
@@ -16,7 +19,19 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $visitors  = Feedback::all();
+                // $visitors = Visitors::get();
+                $offices = Office::all();
+                 $provinces = Provinces::all();
+                 $municipalities = Municipalities::with('province')->get();
+
+        return view('admin.feedbacks.index',[
+            // 'getAllFeedbacks' => $getAllFeedBacks,
+            'visitors' => $visitors,
+            'offices' => $offices,
+            'provinces' => $provinces,
+            'municipalities' => $municipalities,
+        ]);
     }
 
 public function submitFeedback(Request $request)
@@ -140,5 +155,9 @@ public function submitFeedback(Request $request)
     public function destroy($id)
     {
         //
+    }
+
+    public function viewFeedback(){
+
     }
 }
