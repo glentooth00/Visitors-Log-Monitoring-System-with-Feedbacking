@@ -13,7 +13,11 @@ use App\Http\Controllers\VisitorsController;
 use App\Http\Controllers\VisitorController;
 use App\Models\Visitors;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Office;
+use App\Models\Barangays;
+use App\Models\Feedback;
+use App\Models\Municipalities;
+use App\Models\Provinces;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,7 +44,18 @@ Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.s
 
 
 Route::get('/', function () {
-    return view('login');
+
+    $offices = Office::all();
+        $provinces = Provinces::all();
+        $municipalities = Municipalities::with('province')->get();
+        $barangays = Barangays::with('municipality.province')->get();
+
+    return view('login',[
+        'offices' => $offices,
+        'provinces' => $provinces,
+        'municipalities' => $municipalities,
+        'barangays' => $barangays
+    ]);
 })->name('login.user');
 
 Route::post('/user/login', [LoginController::class, 'loginHandler'])->name('login');

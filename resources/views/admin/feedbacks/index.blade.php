@@ -133,6 +133,15 @@
                         </div>
                     </div>
 
+                        <!-- Rating Scale Description -->
+    <div class="alert alert-info mt-3" role="alert">
+        <strong>Rating Scale:</strong><br>
+        1 - Very Dissatisfied &nbsp;&nbsp;
+        2 - Dissatisfied &nbsp;&nbsp;
+        3 - Neutral &nbsp;&nbsp;
+        4 - Satisfied &nbsp;&nbsp;
+        5 - Very Satisfied
+    </div>
                     <!-- Feedback Table -->
                     <!-- Feedback Table -->
                   <!-- Feedback Table -->
