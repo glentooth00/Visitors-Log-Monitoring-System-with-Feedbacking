@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use App\Models\Office;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,26 @@ class OfficeController extends Controller
         $offices = Office::simplePaginate(10); // Fetch 10 offices per page
         return view('admin.offices.index', ['offices' => $offices]);
     }
+
+
+    public function office()
+    {
+        $offices = Office::orderBy('office_name')->get();
+        return view('admin.offices.index', compact('offices'));
+    }
+
+public function feedbacks($office_name)
+{
+    $office = Office::where('office_name', $office_name)->firstOrFail();
+
+    // Match stringified JSON using LIKE
+$feedbacks = Feedback::where('offices', 'LIKE', '%'.$office->office_name.'%')->latest()->get();
+
+// dd($feedbacks);
+
+    return view('admin.offices.feedbacks', compact('office', 'feedbacks'));
+}
+
 
 
 

@@ -118,10 +118,33 @@ public function submitFeedback(Request $request)
      * @param  int  $id
      *
      */
-    public function show($id)
-    {
-        //
-    }
+public function show($id)
+{
+    $feedback = Feedback::findOrFail($id);
+
+    $categories = [
+        'Staff Personnel' => [
+            'attentiveness' => 'Attentiveness',
+            'courtesy' => 'Courtesy',
+            'friendliness' => 'Friendliness',
+            'helpfulness' => 'Helpfulness',
+            'knowledge' => 'Knowledge',
+            'promptness' => 'Promptness',
+        ],
+        'Service' => [
+            'quality_of_service' => 'Quality of Service',
+            'speed_of_service' => 'Speed of Service',
+        ],
+        'Facilities/Amenities' => [
+            'quality_of_facilities' => 'Quality of Facilities',
+            'availability_of_facilities' => 'Availability of Facilities',
+            'cleanliness' => 'Cleanliness',
+        ],
+    ];
+
+    return view('admin.offices.show', compact('feedback', 'categories'));
+}
+
 
     /**
      * Show the form for editing the specified resource.

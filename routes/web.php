@@ -113,4 +113,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::get('/office/index', [OfficeController::class, 'office'])->name('office.index');
+
+    Route::get('/offices/{office_name}/feedback', [OfficeController::class, 'feedbacks'])->name('offices.feedback');
+
+Route::get('/feedbacks/{id}', [FeedbackController::class, 'show'])->name('feedbacks.show');
+
+
+
+
+
+
 });

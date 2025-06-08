@@ -21,6 +21,20 @@
                 <i class="fas fa-users"></i> Feedbacks
             </a>
         </li>
+         <li>
+            <a href="#officeSubmenu" class="text-white dropdown-toggle main-item" data-bs-toggle="collapse"
+                aria-expanded="false">
+                <i class="fas fa-building"></i> Office
+            </a>
+            <ul class="collapse list-unstyled submenu pl-4" id="officeSubmenu">
+                <li>
+
+                    <a href="{{ route('office.index') }}" class="text-white submenu-item">
+                        <i class="fas fa-list"></i> List of Offices
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         <!-- Settings Submenu -->
         <li>
