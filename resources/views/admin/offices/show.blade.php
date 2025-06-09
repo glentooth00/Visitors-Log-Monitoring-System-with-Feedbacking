@@ -7,6 +7,20 @@
     <h2>Feedback Details for {{ $feedback->visitor_name }}</h2>
     <p><strong>Submitted at:</strong> {{ $feedback->created_at->format('F j, Y h:i A') }}</p>
 
+@if (!is_null($averageRating))
+    <p class="fs-4">
+        <strong>Average Rating:</strong> {{ $averageRating }} / 5
+
+        <span class="badge bg-{{ $ratingColor }} mt-1">{{ $ratingText }}</span>
+    </p>
+@else
+    <p class="fs-4">
+        <strong>Average Rating:</strong> Not available
+    </p>
+@endif
+
+
+
     <div class="alert alert-info">
         <strong>Rating Scale:</strong><br>
         1 - Very Dissatisfied &nbsp;

@@ -142,8 +142,44 @@ public function show($id)
         ],
     ];
 
-    return view('admin.offices.show', compact('feedback', 'categories'));
+    $ratings = collect($categories)->flatMap(function ($fields) {
+        return $fields;
+    })->keys()->map(function ($field) use ($feedback) {
+        return is_numeric($feedback->$field) ? (int)$feedback->$field : null;
+    })->filter();
+
+    $averageRating = $ratings->isNotEmpty() ? round($ratings->avg(), 2) : null;
+
+    $ratingText = 'Not Available';
+    $ratingColor = 'secondary';
+
+    if (!is_null($averageRating)) {
+        if ($averageRating >= 1 && $averageRating < 2) {
+            $ratingText = 'Very Dissatisfied';
+            $ratingColor = 'danger';
+        } elseif ($averageRating >= 2 && $averageRating < 3) {
+            $ratingText = 'Dissatisfied';
+            $ratingColor = 'warning';
+        } elseif ($averageRating >= 3 && $averageRating < 4) {
+            $ratingText = 'Neutral';
+            $ratingColor = 'secondary';
+        } elseif ($averageRating >= 4 && $averageRating < 5) {
+            $ratingText = 'Satisfied';
+            $ratingColor = 'primary';
+        } elseif ($averageRating == 5) {
+            $ratingText = 'Very Satisfied';
+            $ratingColor = 'success';
+        }
+    }
+
+    return view('admin.offices.show', compact('feedback', 'categories', 'averageRating', 'ratingText', 'ratingColor'));
 }
+
+
+
+
+
+
 
 
     /**

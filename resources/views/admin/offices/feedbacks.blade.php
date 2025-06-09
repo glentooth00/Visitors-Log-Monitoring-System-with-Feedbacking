@@ -32,9 +32,6 @@
                                 <a href="{{ route('feedbacks.show', $feedback->id) }}" class="btn btn-primary btn-sm">
     View Feedback
 </a>
-
-
-
                                 </td>
                             </tr>
                         @endforeach
